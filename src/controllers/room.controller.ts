@@ -7,15 +7,11 @@ const prisma = new PrismaClient();
 export const getRooms = async (req: Request, res: Response) => {
     try {
         const rooms = await prisma.room.findMany();
-        res.status(200).json({
-            ...successResponse(rooms)
-        });
+        res.status(200).json(successResponse(rooms));
     } catch (error) {
         const errMessage = error instanceof Error ? error.message : "An unknown error occurred";
         console.error(errMessage)
-        res.status(500).json({
-            ...errorResponse(500, 'Internal Server Error', error, errMessage)
-        })
+        res.status(500).json(errorResponse(500, 'Internal Server Error', error, errMessage))
     }
 };
 
@@ -34,13 +30,10 @@ export const getDetailRoom = async (req: Request, res: Response) => {
             return;
         };
 
-        res.status(200).json(successResponse(room));
-        
+        res.status(200).json(successResponse(room));        
     } catch (error) {
         const errMessage = error instanceof Error ? error.message : "An unknown error occurred";
         console.error(errMessage)
-        res.status(500).json({
-            ...errorResponse(500, 'Internal Server Error', error, errMessage)
-        })
+        res.status(500).json(errorResponse(500, 'Internal Server Error', error, errMessage))
     }
 }

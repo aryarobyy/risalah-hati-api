@@ -22,8 +22,8 @@ export const getUsers = async (req: Request, res: Response) => {
 };
 
 export const getDetailUser = async (req: Request, res: Response) => {
-    const { id } = req.params;
     try {
+        const { id } = req.params;
         const user = await prisma.user.findUnique({
             where: {
                 id: id
@@ -31,9 +31,7 @@ export const getDetailUser = async (req: Request, res: Response) => {
         });
 
         if (!user) {
-            res.status(404).json({
-                ...errorResponse(404, 'not found', "Data Not Found", "User Not Found")
-            });
+            res.status(404).json(errorResponse(404, 'not found', "Data Not Found", "User Not Found"));
             return;
         };
 
@@ -50,8 +48,8 @@ export const getDetailUser = async (req: Request, res: Response) => {
 }
 
 export const postUser = async (req: Request, res: Response) => {
-    const { email, username, name, role, password } = req.body;
     try {
+        const { email, username, name, role, password } = req.body;
         // cek email sudah terdaftar
         const duplicateUser = await prisma.user.findFirst({
             where: {
@@ -99,10 +97,10 @@ export const postUser = async (req: Request, res: Response) => {
 }
 
 export const updateUser = async (req: Request, res: Response) => {
-    const { id } = req.params;
-    const { email, username, name, role } = req.body;
-
     try {
+        const { id } = req.params;
+        const { email, username, name, role } = req.body;
+
         const existingUser = await prisma.user.findFirst({
             where: {
                 OR: [
@@ -152,9 +150,9 @@ export const updateUser = async (req: Request, res: Response) => {
 }
 
 export const deleteUser = async (req: Request, res: Response) => {
-    const { id } = req.params;
-
     try {
+        const { id } = req.params;
+
         const user = await prisma.user.delete({
             where: {
                 id
@@ -173,9 +171,9 @@ export const deleteUser = async (req: Request, res: Response) => {
 }
 
 export const loginUser = async (req: Request, res: Response) => {
-    const { email, password: userPassword } = req.body;
-
     try {
+        const { email, password: userPassword } = req.body;
+
         const user = await prisma.user.findUnique({
             where: {
                 email

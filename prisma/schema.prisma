@@ -22,7 +22,8 @@ model User {
   id String @id @default(uuid())
   email String @unique
   username String @unique
-  profilePic String
+  password String
+  profilePic String? @default("")
   name String
   role Role @default(USER)
   createdAt DateTime @default(now())
@@ -38,7 +39,7 @@ model User {
 model Room {
   id String @id @default(uuid())
   title String
-  descripion String?
+  descripion String? @default("")
   image String
   authorId String
   createdAt DateTime @default(now())
@@ -83,7 +84,7 @@ model Blog {
   id Int @id @default(autoincrement())
   authorId String
   title String
-  content String?
+  content String? @default("")
   image String
   createdAt DateTime @default(now())
   type BlogType

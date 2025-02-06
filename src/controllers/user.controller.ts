@@ -75,6 +75,7 @@ export const postUser = async (req: Request, res: Response) => {
                 password: hashedPassword,
             },
             select: {
+                id: true,
                 email: true,
                 username: true,
                 name: true,
@@ -129,6 +130,7 @@ export const updateUser = async (req: Request, res: Response) => {
                 role
             },
             select: {
+                id: true,
                 email: true,
                 username: true,
                 name: true,

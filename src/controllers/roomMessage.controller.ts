@@ -40,6 +40,12 @@ export const postRoomMessage = async (req: Request, res: Response) => {
                 roomId,
                 senderId,
                 content
+            },
+            select: {
+                id: true,
+                roomId: true,
+                senderId: true,
+                content: true,
             }
         })
 
@@ -63,6 +69,12 @@ export const updateRoomMessage = async (req: Request, res: Response) => {
             },
             data: {
                 content
+            },
+            select: {
+                id: true,
+                roomId: true,
+                senderId: true,
+                content: true,
             }
         });
 

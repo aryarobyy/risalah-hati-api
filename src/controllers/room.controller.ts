@@ -49,13 +49,20 @@ export const postRoom = async (req: Request, res: Response) => {
                 authorId,
             },
             select: {
+                id: true,
                 title: true,
                 description: true,
                 image: true,
                 authorId: true,
-                id: true
             }
         })
+
+        await prisma.userRoom.create({
+            data: {
+                userId: authorId,
+                roomId: room.id
+            }
+        });
 
         res.status(200).json(
             successResponse(room)
@@ -85,6 +92,7 @@ export const updateRoom = async (req: Request, res: Response) => {
                 image,
             },
             select: {
+                id: true,
                 title: true,
                 description: true,
                 image: true

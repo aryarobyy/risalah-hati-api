@@ -17,7 +17,7 @@ export const getRooms = async (req: Request, res: Response) => {
 
 export const getDetailRoom = async (req: Request, res: Response) => {
     try {
-        const {id} = req.params;
+        const { id } = req.params;
 
         const room = await prisma.room.findUnique({
             where: {
@@ -25,12 +25,12 @@ export const getDetailRoom = async (req: Request, res: Response) => {
             }
         });
 
-        if(!room){
+        if (!room) {
             res.status(404).json(errorResponse(404, 'not found', "Data Not Found", "Room Not Found"))
             return;
         };
 
-        res.status(200).json(successResponse(room));        
+        res.status(200).json(successResponse(room));
     } catch (error) {
         const errMessage = error instanceof Error ? error.message : "An unknown error occurred";
         console.error(errMessage)
@@ -39,8 +39,9 @@ export const getDetailRoom = async (req: Request, res: Response) => {
 }
 
 export const postRoom = async (req: Request, res: Response) => {
-    const { title, description, image, authorId, } = req.body;
     try {
+        const { title, description, image, authorId, } = req.body;
+        
         const room = await prisma.room.create({
             data: {
                 title,
@@ -78,10 +79,10 @@ export const postRoom = async (req: Request, res: Response) => {
 }
 
 export const updateRoom = async (req: Request, res: Response) => {
-    const { id } = req.params;
-    const { title, description, image } = req.body;
-
     try {
+        const { id } = req.params;
+        const { title, description, image } = req.body;
+
         const room = await prisma.room.update({
             where: {
                 id

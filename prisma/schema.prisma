@@ -70,7 +70,7 @@ model RoomMessage {
   createdAt DateTime @default(now())
 
   sender User @relation(fields: [senderId], references: [id])
-  room Room @relation(fields: [roomId], references: [id])
+  room Room @relation(fields: [roomId], references: [id], onDelete: Cascade)
 
   @@map("room_message")
 }

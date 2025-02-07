@@ -100,7 +100,7 @@ export const postUser = async (req: Request, res: Response) => {
 export const updateUser = async (req: Request, res: Response) => {
     try {
         const { id } = req.params;
-        const { email, username, name, role } = req.body;
+        const { email, username, name, role, profilePic } = req.body;
 
         const existingUser = await prisma.user.findFirst({
             where: {
@@ -127,7 +127,8 @@ export const updateUser = async (req: Request, res: Response) => {
                 email,
                 username,
                 name,
-                role
+                role,
+                profilePic,
             },
             select: {
                 id: true,

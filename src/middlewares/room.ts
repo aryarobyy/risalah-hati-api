@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { addRoomSchema, deleteRoomSchema, updateRoomSchema } from "../zodSchema/roomSchema";
 import { errorResponse } from "../utils/response";
-import { deleteCloudinaryImage, uploadRoomImage } from "../utils/cloudinaryMethods";
+import { deleteCloudinaryImage, uploadCloudinaryImage} from "../utils/cloudinaryMethods";
 import { getPublicIdFromUrl } from "../utils/strings";
 import fileUpload from "express-fileupload";
 
@@ -18,7 +18,7 @@ export const addRoomMiddleware = async (req: Request, res: Response, next: NextF
             return;
         }
 
-        const response = await uploadRoomImage(req.files.image as fileUpload.UploadedFile);
+        const response = await uploadCloudinaryImage(req.files.image as fileUpload.UploadedFile, "rooms");
         if (!response.success) {
             res.status(response.code).json(errorResponse(response.code, "", response.error, response.errorMessage || ""))
             return;
@@ -49,7 +49,7 @@ export const updateRoomMiddleware = async (req: Request, res: Response, next: Ne
                 return;
             };
 
-            const responseUpload = await uploadRoomImage(req.files.newImage as fileUpload.UploadedFile);
+            const responseUpload = await uploadCloudinaryImage(req.files.newImage as fileUpload.UploadedFile, "rooms");
 
             const publicId = getPublicIdFromUrl(req.body.image);
             if (publicId) {

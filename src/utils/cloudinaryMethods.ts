@@ -8,11 +8,11 @@ export const uploadUserPhotoProfile = async () => {
     });
 }
 
-export const uploadRoomImage = async (file: fileUpload.UploadedFile) => {
+export const uploadCloudinaryImage = async (file: fileUpload.UploadedFile, folderPath: string) => {
     try {
         
         const result = await cloudinary.uploader.upload(file.tempFilePath, {
-            folder: "rooms",
+            folder: folderPath,
         });
 
         return {
@@ -29,7 +29,7 @@ export const uploadRoomImage = async (file: fileUpload.UploadedFile) => {
             errorMessage: errMessage
         }
     }
-}
+};
 
 export const deleteCloudinaryImage = async (publicId: string) => {
     try {

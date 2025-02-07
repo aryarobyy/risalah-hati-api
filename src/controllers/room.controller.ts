@@ -83,7 +83,7 @@ export const updateRoom = async (req: Request, res: Response) => {
         const { id } = req.params;
         const { title, description, image } = req.body;
 
-        const room = await prisma.room.update({
+        const response = await prisma.room.update({
             where: {
                 id
             },
@@ -99,8 +99,9 @@ export const updateRoom = async (req: Request, res: Response) => {
                 image: true
             }
         })
+        
         res.status(200).json(
-            successResponse(room)
+            successResponse(response)
         )
     } catch (error) {
         const errMessage = error instanceof Error ? error.message : "An unknown error occurred";

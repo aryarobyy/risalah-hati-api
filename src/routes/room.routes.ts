@@ -1,13 +1,13 @@
 import { Router } from "express";
 import { deleteRoom, getDetailRoom, getRooms, postRoom, updateRoom } from "../controllers/room.controller";
-import { validateAddRoom } from "../middlewares/room";
+import { updateRoomMiddleware, addRoomMiddleware, deleteRoomMiddleware} from "../middlewares/room";
 
 const router = Router();
 
 router.get("/", getRooms);
 router.get("/:id", getDetailRoom);
-router.post("/post", validateAddRoom, postRoom);
-router.put("/:id", validateAddRoom, updateRoom);
-router.delete("/:id", deleteRoom);
+router.post("/post", addRoomMiddleware, postRoom);
+router.put("/:id", updateRoomMiddleware, updateRoom);
+router.delete("/:id", deleteRoomMiddleware, deleteRoom);
 
 export default router;

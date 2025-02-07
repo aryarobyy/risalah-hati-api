@@ -53,7 +53,7 @@ export const postUser = async (req: Request, res: Response) => {
         // cek email sudah terdaftar
         const duplicateUser = await prisma.user.findFirst({
             where: {
-                OR: [{ email, username }]
+                OR: [{ email}, {username}]
             }
         })
 

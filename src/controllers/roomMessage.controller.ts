@@ -20,7 +20,7 @@ export const getRoomMessages = async (req: Request, res: Response) => {
         const { id } = req.params;
         const messages = await prisma.roomMessage.findMany({
             where: {
-                id
+                roomId: id
             }
         });
         res.status(200).json(successResponse(messages));

@@ -41,10 +41,10 @@ model Room {
   title String @db.VarChar(255)
   description String? @default("") @db.VarChar(255)
   image String @db.VarChar(255)
-  authorId String
+  authorId String @default("not-authored")
   createdAt DateTime @default(now())
 
-  author User @relation(fields: [authorId], references: [id])
+  author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
 
   messages RoomMessage[]
   users UserRoom[]

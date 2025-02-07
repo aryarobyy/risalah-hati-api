@@ -56,6 +56,6 @@ export const loginUserSchema = z.object({
 
 export const deleteUserSchema = z.object({
     profilePic: z.string({
-        
+        message: "Profile Picture is required!"
     })
 })

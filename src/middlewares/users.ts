@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { deleteUserSchema, loginUserSchema, registUserSchema, updateUserSchema } from "../zodSchema/userSchema";
 import { errorResponse } from "../utils/response";
-import { deleteCloudinaryImage, uploadCloudinaryImage } from "../utils/cloudinaryMethods";
+import { deleteCloudinaryImage, deleteUserRoomsImage, uploadCloudinaryImage } from "../utils/cloudinaryMethods";
 import fileUpload from "express-fileupload";
 import { getPublicIdFromUrl } from "../utils/strings";
 
@@ -34,7 +34,7 @@ export const updateUserMiddleware = async (req: Request, res: Response, next: Ne
                 return
             };
 
-            const responseUpload = await uploadCloudinaryImage(req.files.newProfilePic as fileUpload.UploadedFile, "profile picture");
+            const responseUpload = await uploadCloudinaryImage(req.files.newProfilePic as fileUpload.UploadedFile, "profile-picture");
 
             if (req.body.profilePic) {
                 const publicId = getPublicIdFromUrl(req.body.profilePic);
@@ -84,15 +84,26 @@ export const deleteUserMiddleware = async (req: Request, res: Response, next: Ne
             return;
         }
 
-        const publicId = getPublicIdFromUrl(req.body.profilePic);
-        if (publicId) {
-            const responseDelete = await deleteCloudinaryImage(publicId);
-            if (!responseDelete.success) {
-                console.error(responseDelete.errorMessage);
-                res.status(responseDelete.code).json(errorResponse(responseDelete.code, 'Internal Server Error', responseDelete.error, responseDelete.errorMessage || ""))
-                return;
+        if (req.body.profilePic) {
+            const publicId = getPublicIdFromUrl(req.body.profilePic);
+            console.log(publicId);
+            if (publicId) {
+                const responseDelete = await deleteCloudinaryImage(publicId);
+                if (!responseDelete.success) {
+                    console.error(responseDelete.errorMessage);
+                    res.status(responseDelete.code).json(errorResponse(responseDelete.code, 'Internal Server Error', responseDelete.error, responseDelete.errorMessage || ""))
+                    return;
+                };
             };
         };
+
+        await deleteUserRoomsImage(req.params.id);
+        // if (!response.success) {
+        //     console.error(response.errorMessage);
+        //     res.status(response.code).json(errorResponse(response.code, 'Internal Server Error', response.error, response.errorMessage || ""))
+        //     return;
+        // }
+
         next()
     } catch (error) {
         next(error)

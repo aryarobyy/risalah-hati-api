@@ -106,3 +106,23 @@ export const deleteRoomMessage = async (req: Request, res: Response) => {
         )
     }
 }
+
+export const getRoomMessageByRoomId = async (req: Request, res: Response) => { 
+    try { 
+        const { roomId } = req.params;
+
+        const messages = await prisma.roomMessage.findMany({
+            where: {
+                roomId: roomId
+            },
+        });
+
+        res.status(200).json(successResponse(messages));
+    } catch (error) {
+        const errMessage = error instanceof Error ? error.message : "An unknown error occurred";
+        console.error(errMessage);
+        res.status(500).json(
+            errorResponse(500, 'Internal Server Error', error, errMessage)
+        );
+    }
+};

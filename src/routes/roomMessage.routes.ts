@@ -8,6 +8,6 @@ router.get('/:id', getRoomMessages);
 router.post('/', postRoomMessage);
 router.put('/:id', updateRoomMessage);
 router.delete('/:id', deleteRoomMessage);
-router.get('/:roomId', getRoomMessageByRoomId);
+// router.get('/:roomId', getRoomMessageByRoomId);
 
 export default router;

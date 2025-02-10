@@ -58,8 +58,7 @@ export const postUser = async (req: Request, res: Response) => {
         })
 
         if (duplicateUser) {
-            res.status(409).json(errorResponse(409, 'Conflict', "Conflict", "Email or Username already taken")
-            )
+            res.status(409).json(errorResponse(409, 'Conflict', "Conflict", "Email or Username already taken"))
             return;
         }
 

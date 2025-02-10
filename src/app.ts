@@ -3,6 +3,7 @@ import userRoutes from './routes/user.routes';
 import roomRoutes from './routes/room.routes';
 import roomMessageRoutes from './routes/roomMessage.routes';
 import blogRoutes from './routes/blog.routes';
+import vocabRoutes from './routes/vocab.routes';
 import fileUpload from "express-fileupload";
 
 const app = express();
@@ -17,8 +18,9 @@ app.use(fileUpload({
 // app.use('/', )
 app.use('/user', userRoutes);
 app.use('/room', roomRoutes);
-app.use('/room-message', roomMessageRoutes)
-app.use('/blog', blogRoutes)
+app.use('/room-message', roomMessageRoutes);
+app.use('/blog', blogRoutes);
+app.use('/vocab', vocabRoutes);
 
 
 

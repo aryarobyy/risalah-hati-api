@@ -95,3 +95,11 @@ model Blog {
 
   @@map("blog")
 }
+
+model Vocab {
+  id String @id
+  name String @db.VarChar(25)
+  image String
+
+  @@map("vocab")
+}

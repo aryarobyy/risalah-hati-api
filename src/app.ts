@@ -5,9 +5,13 @@ import roomMessageRoutes from './routes/roomMessage.routes';
 import blogRoutes from './routes/blog.routes';
 import vocabRoutes from './routes/vocab.routes';
 import fileUpload from "express-fileupload";
+import cors from "cors";
+import { join } from 'path';
+
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 app.use(fileUpload({
     limits: { fileSize: 50 * 1024 * 1024 },
@@ -15,7 +19,12 @@ app.use(fileUpload({
     tempFileDir: '/temp/'
 }))
 
-// app.use('/', )
+app.get('/', (req, res) => {
+    res.sendFile(join(__dirname, 'index.html'));
+  });
+app.get('/testing', (req, res) => {
+    res.sendFile(join(__dirname, 'testing.html'));
+  });
 app.use('/user', userRoutes);
 app.use('/room', roomRoutes);
 app.use('/room-message', roomMessageRoutes);

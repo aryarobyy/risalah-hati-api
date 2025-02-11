@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { deleteUserSchema, loginUserSchema, registUserSchema, updateUserSchema } from "../zodSchema/userSchema";
 import { errorResponse } from "../utils/response";
-import { deleteCloudinaryImage, deleteUserRoomsImage, uploadCloudinaryImage } from "../utils/cloudinaryMethods";
+import { deleteCloudinaryImage, deleteUserRoomsImage, uploadCloudinaryImage } from "../services/cloudinaryMethods";
 import fileUpload from "express-fileupload";
 import { getPublicIdFromUrl } from "../utils/strings";
 

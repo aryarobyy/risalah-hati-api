@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import cloudinary from "../configs/cloudinary"
 import fileUpload from "express-fileupload";
-import { getPublicIdFromUrl } from "./strings";
+import { getPublicIdFromUrl } from "../utils/strings";
 
 
 export const uploadCloudinaryImage = async (file: fileUpload.UploadedFile, folderPath: string) => {

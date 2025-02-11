@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { errorResponse } from "../utils/response";
-import { deleteCloudinaryImage, uploadCloudinaryImage } from "../utils/cloudinaryMethods";
+import { deleteCloudinaryImage, uploadCloudinaryImage } from "../services/cloudinaryMethods";
 import { getPublicIdFromUrl } from "../utils/strings";
 import fileUpload from "express-fileupload";
 import { addBlogSchema, deleteBlogSchema, updateBlogSchema } from "../zodSchema/blogSchema";

@@ -1,7 +1,9 @@
 import { z } from "zod";
 
 export const addVocabSchema = z.object({
-    id: z.string().regex(/^vocab/, {
+    id: z.string({
+        message: "ID is required!"
+    }).regex(/^vocab/, {
         message: "ID must start with 'vocab'!"
     }),
     name: z.string({
@@ -10,7 +12,9 @@ export const addVocabSchema = z.object({
 });
 
 export const updateVocabSchema = z.object({
-    id: z.string().regex(/^vocab/, {
+    id: z.string({
+        message: "ID is required!"
+    }).regex(/^vocab/, {
         message: "ID must start with 'vocab'!"
     }),
     name: z.string({

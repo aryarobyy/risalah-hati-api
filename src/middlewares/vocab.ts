@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { errorResponse } from "../utils/response";
-import { deleteCloudinaryImage, uploadCloudinaryImage } from "../utils/cloudinaryMethods";
+import { deleteCloudinaryImage, uploadCloudinaryImage } from "../services/cloudinaryMethods";
 import { getPublicIdFromUrl } from "../utils/strings";
 import fileUpload from "express-fileupload";
 import { addVocabSchema, deleteVocabSchema, updateVocabSchema } from "../zodSchema/vocabSchema";
@@ -30,7 +30,7 @@ export const addVocabMiddleware = async (req: Request, res: Response, next: Next
         });
 
         if (isVocabExisted) {
-            res.status(409).json(errorResponse(409, 'Conflict', "Conflict", `Vocab with id:${req.body.id} is already existed!`))
+            res.status(409).json(errorResponse(409, 'Conflict', "Conflict", `Vocab with id: ${req.body.id} is already existed!`))
             return;
         };
 

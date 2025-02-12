@@ -1,9 +1,6 @@
-import { PrismaClient } from "@prisma/client";
+import prisma from "../configs/prismaClient";
 import { errorResponse, successResponse } from "../utils/response";
 import { Request, Response } from "express";
-
-const prisma = new PrismaClient();
-
 
 export const getAllVocab = async (req: Request, res: Response) => {
     try {

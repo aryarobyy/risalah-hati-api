@@ -18,7 +18,6 @@ const io = new Server(server, {
 
 chatSocket(io);
 
-
 const port = normalizePort(PORT);
 
 // app.listen(port, '0.0.0.0', () => {

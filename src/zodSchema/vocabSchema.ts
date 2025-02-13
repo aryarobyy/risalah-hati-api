@@ -1,27 +1,23 @@
 import { z } from "zod";
 
 export const addVocabSchema = z.object({
-    id: z.string({
-        message: "ID is required!"
-    }).regex(/^vocab/, {
-        message: "ID must start with 'vocab'!"
-    }),
     name: z.string({
         message: "Name of vocab is required!"
+    }),
+    signCode: z.string({
+        message: "Sign Code is required"
     })
 });
 
 export const updateVocabSchema = z.object({
-    id: z.string({
-        message: "ID is required!"
-    }).regex(/^vocab/, {
-        message: "ID must start with 'vocab'!"
-    }),
     name: z.string({
         message: "Name of vocab is required!"
     }),
     image: z.string({
         message: "Image is required!"
+    }),
+    signCode: z.string({
+        message: "Sign Code is required"
     })
 });
 

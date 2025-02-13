@@ -23,17 +23,6 @@ export const addVocabMiddleware = async (req: Request, res: Response, next: Next
             return;
         };
 
-        const isVocabExisted = await prisma.vocab.findUnique({
-            where: {
-                id: req.body.id
-            }
-        });
-
-        if (isVocabExisted) {
-            res.status(409).json(errorResponse(409, 'Conflict', "Conflict", `Vocab with id: ${req.body.id} is already existed!`))
-            return;
-        };
-
         const response = await uploadCloudinaryImage(req.files.image as fileUpload.UploadedFile, "vocabs");
         if (!response.success) {
             res.status(response.code).json(errorResponse(response.code, "", response.error, response.errorMessage || ""))

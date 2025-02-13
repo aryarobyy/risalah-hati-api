@@ -97,9 +97,10 @@ model Blog {
 }
 
 model Vocab {
-  id String @id
+  id Int @default(autoincrement()) @id
   name String @db.VarChar(25)
   image String
+  signCode String
 
   @@map("vocab")
 }

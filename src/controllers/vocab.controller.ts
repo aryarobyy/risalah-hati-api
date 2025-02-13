@@ -15,7 +15,8 @@ export const getAllVocab = async (req: Request, res: Response) => {
 
 export const getVocab = async (req: Request, res: Response) => {
     try {
-        const { id } = req.params;
+        const { id: vocabId } = req.params;
+        const id = Number(vocabId);
 
         const vocab = await prisma.vocab.findUnique({
             where: {
@@ -38,13 +39,13 @@ export const getVocab = async (req: Request, res: Response) => {
 
 export const postVocab = async (req: Request, res: Response) => {
     try {
-        const { id, name, image } = req.body;
+        const { name, image, signCode } = req.body;
 
         const vocab = await prisma.vocab.create({
             data: {
-                id,
                 name,
-                image
+                image,
+                signCode,
             }
         });
 
@@ -59,17 +60,18 @@ export const postVocab = async (req: Request, res: Response) => {
 export const updateVocab = async (req: Request, res: Response) => {
     try {
         const { id: vocabId } = req.params;
+        const id = Number(vocabId);
 
-        const { id, name, image } = req.body;
+        const { name, image, signCode } = req.body;
 
         const response = await prisma.vocab.update({
             where: {
-                id: vocabId
+                id
             },
             data: {
-                id,
                 name,
-                image
+                image,
+                signCode
             }
         });
 
@@ -83,7 +85,9 @@ export const updateVocab = async (req: Request, res: Response) => {
 
 export const deleteVocab = async (req: Request, res: Response) => {
     try {
-        const { id } = req.params;
+        const { id: vocabId } = req.params;
+        const id = Number(vocabId);
+
 
         const response = await prisma.vocab.delete({
             where: {

@@ -37,6 +37,25 @@ export const getVocab = async (req: Request, res: Response) => {
     }
 };
 
+export const getVocabsBySignCode = async (req: Request, res: Response) => {
+    try{
+        const { signCode } = req.params;
+        const vocabs = await prisma.vocab.findMany({
+            where: {
+                signCode: signCode
+            },
+        });
+
+        res.status(200).json(successResponse(vocabs));
+    } catch (error) {
+        const errMessage = error instanceof Error ? error.message : "An unknown error occurred";
+        console.error(errMessage);
+        res.status(500).json(
+            errorResponse(500, 'Internal Server Error', error, errMessage)
+        );
+    }
+}
+
 export const postVocab = async (req: Request, res: Response) => {
     try {
         const { name, image, signCode } = req.body;

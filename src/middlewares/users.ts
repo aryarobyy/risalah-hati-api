@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { deleteUserSchema, loginUserSchema, registUserSchema, updateUserSchema } from "../zodSchema/userSchema";
+import { deleteUserSchema, loginUserSchema, registUserSchema, updateUserSchema, verifyUserTokenSchema } from "../zodSchema/userSchema";
 import { errorResponse } from "../utils/response";
 import { deleteCloudinaryImage, deleteUserRoomsImage, uploadCloudinaryImage } from "../services/cloudinaryMethods";
 import fileUpload from "express-fileupload";
@@ -104,6 +104,19 @@ export const deleteUserMiddleware = async (req: Request, res: Response, next: Ne
         //     return;
         // }
 
+        next()
+    } catch (error) {
+        next(error)
+    }
+};
+
+export const verifyTokenMiddleware = (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const result = verifyUserTokenSchema.safeParse(req.body);
+        if (!result.success) {
+            res.status(400).json(errorResponse(400, 'Bad Request', result.error, result.error.issues[0].message))
+            return;
+        };
         next()
     } catch (error) {
         next(error)

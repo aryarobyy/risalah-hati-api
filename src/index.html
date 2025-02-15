@@ -102,6 +102,11 @@
             })
             window.scrollTo(0, document.body.scrollHeight);
         });
+
+        socket.on('newMessage', data => {
+            console.log(data);
+            messages.appendChild(data);
+        });
     </script>
 </body>
 

@@ -22,7 +22,7 @@ export const postMessage = async (data: { senderId: string; roomId: string; cont
     try {
         const result = addRoomMessage.safeParse(data);
         if(!result.success) {
-            // do something
+            console.error(result.error)
         };
 
         const newMessage = await prisma.roomMessage.create({
@@ -32,8 +32,9 @@ export const postMessage = async (data: { senderId: string; roomId: string; cont
             }
         });
 
+
         return newMessage;
     } catch (error) {
-        // 
+        // console.error(e)
     }
 }

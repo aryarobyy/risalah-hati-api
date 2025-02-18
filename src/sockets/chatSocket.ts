@@ -3,12 +3,9 @@ import { getRoomMessageByRoomId, postMessage } from "../services/message.service
 
 const chatSocket = (io: Server) => {
     io.on("connection", (socket: Socket) => {
-        console.log(`User connected: ${socket.id}`);
-    
         socket.on("joinRoom", async (roomId: string) => {
             socket.join(roomId);
     
-            // send room message into client
             const messages = await getRoomMessageByRoomId(roomId);
             socket.emit("loadMessages", messages);
         });

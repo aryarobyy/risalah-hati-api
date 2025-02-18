@@ -22,7 +22,7 @@ export const postMessage = async (data: { senderId: string; roomId: string; cont
     try {
         const result = addRoomMessage.safeParse(data);
         if(!result.success) {
-            // do something
+            console.error(result.error)
         };
 
         const newMessage = await prisma.roomMessage.create({
@@ -31,9 +31,11 @@ export const postMessage = async (data: { senderId: string; roomId: string; cont
                 sender: true
             }
         });
+        console.log(newMessage)
 
         return newMessage;
     } catch (error) {
-        // 
+        const errMessage = error instanceof Error ? error.message : "An unknown error occurred";
+        console.error(errMessage)
     }
 }

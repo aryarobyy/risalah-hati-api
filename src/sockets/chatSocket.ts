@@ -12,7 +12,8 @@ const chatSocket = (io: Server) => {
     
         socket.on("sendMessage", async (data) => {
             const newMessage = await postMessage(data);
-            io.to(data.roomId).emit("newMessage", newMessage);
+            // io.emit("sendMessage", data);
+            io.to(data.roomId).emit("newMessage", data);
         });
     
     

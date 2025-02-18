@@ -1,6 +1,6 @@
 import express from "express";
-import { deleteUser, getDetailUser, getUsers, loginUser, postUser, updateUser } from "../controllers/user.controller";
-import { deleteUserMiddleware, loginUserMiddleware, registUserMiddleware, updateUserMiddleware } from "../middlewares/users";
+import { deleteUser, getDetailUser, getUsers, loginUser, postUser, updateUser, verifyTokenUser } from "../controllers/user.controller";
+import { deleteUserMiddleware, loginUserMiddleware, registUserMiddleware, updateUserMiddleware, verifyTokenMiddleware } from "../middlewares/users";
 
 const router = express.Router();
 
@@ -10,5 +10,6 @@ router.post('/', registUserMiddleware, postUser);
 router.put('/:id', updateUserMiddleware, updateUser);
 router.delete('/:id', deleteUserMiddleware, deleteUser);
 router.post('/login', loginUserMiddleware, loginUser);
+router.post('/verify-token', verifyTokenMiddleware, verifyTokenUser)
 
 export default router;

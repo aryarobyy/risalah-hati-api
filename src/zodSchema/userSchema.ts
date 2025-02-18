@@ -58,4 +58,10 @@ export const deleteUserSchema = z.object({
     profilePic: z.string({
         message: "Profile Picture is required!"
     })
+});
+
+export const verifyUserTokenSchema = z.object({
+    token: z.string({
+        message: "Token is required!"
+    })
 })

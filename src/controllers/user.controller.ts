@@ -68,7 +68,6 @@ export const postUser = async (req: Request, res: Response) => {
                 username,
                 name,
                 role,
-                profilePic: "",
                 password: hashedPassword,
             },
             select: {
@@ -78,6 +77,7 @@ export const postUser = async (req: Request, res: Response) => {
                 name: true,
                 role: true,
                 profilePic: true,
+                bannerPic: true,
             }
         });
 
@@ -97,7 +97,7 @@ export const postUser = async (req: Request, res: Response) => {
 export const updateUser = async (req: Request, res: Response) => {
     try {
         const { id } = req.params;
-        const { email, username, name, role, profilePic } = req.body;
+        const { email, username, name, role, profilePic, bannerPic } = req.body;
 
         const existingUser = await prisma.user.findFirst({
             where: {
@@ -126,6 +126,7 @@ export const updateUser = async (req: Request, res: Response) => {
                 name,
                 role,
                 profilePic,
+                bannerPic,
             },
             select: {
                 id: true,
@@ -134,6 +135,7 @@ export const updateUser = async (req: Request, res: Response) => {
                 name: true,
                 role: true,
                 profilePic: true,
+                bannerPic: true,
             }
         });
 

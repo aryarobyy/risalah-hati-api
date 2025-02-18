@@ -69,7 +69,6 @@
     <form id="form" action="">
         <input id="input" autocomplete="off" /><button>Send</button>
     </form>
-
     <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script>
     <script>
         const socket = io();
@@ -83,15 +82,15 @@
             e.preventDefault();
             if (input.value) {
                 socket.emit('sendMessage', { 
-                    senderId: "fadd7bb4-f176-4f89-b9bd-706d91233c8a",
-                    roomId: "7229c3fd-1558-41b6-ab90-07010933072d",
+                    senderId: "a32ed349-598d-4a39-9a8d-632d039bec63",
+                    roomId: "6ce75df6-5f40-4dd7-811d-0e6fbfa9b1a7",
                     content: input.value
                 });
                 input.value = '';
             }
         });
 
-        socket.emit("joinRoom", "7229c3fd-1558-41b6-ab90-07010933072d")
+        socket.emit("joinRoom", "6ce75df6-5f40-4dd7-811d-0e6fbfa9b1a7")
 
         socket.on('loadMessages', (data) => {
             console.log(data);

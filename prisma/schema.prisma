@@ -25,6 +25,7 @@ model User {
   name String? @db.VarChar(255) @default("")
   password String @db.VarChar(255)
   profilePic String? @default("") @db.VarChar(255)
+  bannerPic String? @default("") @db.VarChar(255)
   role Role @default(USER)
   createdAt DateTime @default(now())
   messages RoomMessage[]
@@ -57,6 +58,7 @@ model UserRoom {
   roomId String
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
   room Room @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
 
   @@id([userId, roomId])
   @@map("user_room")

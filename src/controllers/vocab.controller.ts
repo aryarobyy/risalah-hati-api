@@ -49,7 +49,7 @@ export const getVocabsBySignCode = async (req: Request, res: Response) => {
         const { signCode } = req.params;
         const vocabs = await prisma.vocab.findMany({
             where: {
-                signCode: signCode
+                signCode
             },
         });
 

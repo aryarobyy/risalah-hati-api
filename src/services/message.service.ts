@@ -14,15 +14,17 @@ export const getRoomMessageByRoomId = async (roomId: string) => {
 
         return messages;
     } catch (error) {
-        // ntaran
+        const errMessage = error instanceof Error ? error.message : "An unknown error occurred";
+        console.error(errMessage)
     }
 };
 
 export const postMessage = async (data: { senderId: string; roomId: string; content: string }) => {
     try {
         const result = addRoomMessage.safeParse(data);
-        if(!result.success) {
+        if (!result.success) {
             console.error(result.error)
+            return;
         };
 
         const newMessage = await prisma.roomMessage.create({
@@ -31,7 +33,6 @@ export const postMessage = async (data: { senderId: string; roomId: string; cont
                 sender: true
             }
         });
-        console.log(newMessage)
 
         return newMessage;
     } catch (error) {

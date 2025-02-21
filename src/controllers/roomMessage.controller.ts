@@ -105,22 +105,22 @@ export const deleteRoomMessage = async (req: Request, res: Response) => {
     }
 }
 
-export const getRoomMessageByRoomId = async (req: Request, res: Response) => { 
-    try { 
-        const { roomId } = req.params;
-
-        const messages = await prisma.roomMessage.findMany({
+export const getLatestMessage = async (req: Request, res: Response) => { 
+    try {
+        const { id } = req.params;
+        const latestMessage = await prisma.roomMessage.findFirst({
             where: {
-                roomId: roomId
+                roomId: id
             },
+            orderBy: {
+                createdAt: 'desc'
+            }
         });
 
-        res.status(200).json(successResponse(messages));
+        res.status(200).json(successResponse(latestMessage));
     } catch (error) {
         const errMessage = error instanceof Error ? error.message : "An unknown error occurred";
         console.error(errMessage);
-        res.status(500).json(
-            errorResponse(500, 'Internal Server Error', error, errMessage)
-        );
+        res.status(500).json(errorResponse(500, 'Internal Server Error', error, errMessage));
     }
 };

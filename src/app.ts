@@ -7,6 +7,7 @@ import vocabRoutes from './routes/vocab.routes';
 import fileUpload from "express-fileupload";
 import cors from "cors";
 import { join } from 'path';
+import userRoomRoutes from './routes/userRoom.routes';
 
 
 const app = express();
@@ -30,6 +31,7 @@ app.use('/room', roomRoutes);
 app.use('/room-message', roomMessageRoutes);
 app.use('/blog', blogRoutes);
 app.use('/vocab', vocabRoutes);
+app.use('/user-room', userRoomRoutes);
 
 
 

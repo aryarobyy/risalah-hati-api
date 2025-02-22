@@ -229,49 +229,52 @@ export const verifyTokenUser = async (req: Request, res: Response) => {
     }
 }
 
-export const getUserByUsername = async (req: Request, res: Response) => {
+export const getUsersByUsername = async (req: Request, res: Response) => {
     try {
         const { username } = req.params;
-        const user = await prisma.user.findUnique({
+        const users = await prisma.user.findMany({
             where: {
-                username: username
+                username: {
+                    contains: username,
+                }
             }
         });
 
-        if (!user) {
+        if (users.length === 0) {
             res.status(404).json(errorResponse(404, 'not found', "Data Not Found", "User Not Found"));
             return;
         };
 
-        res.status(200).json(
-            successResponse(user)
-        );
+        res.status(200).json({
+            ...successResponse(users)
+        });
     } catch (error) {
         const errMessage = error instanceof Error ? error.message : "An unknown error occurred";
-        console.error(errMessage)
+        console.error(errMessage);
         res.status(500).json(
             errorResponse(500, 'Internal Server Error', error, errMessage)
-        )
+        );
     }
-}
+};
+
 
 export const getUserByEmail = async (req: Request, res: Response) => {
     try {
         const { email } = req.params;
-        const user = await prisma.user.findUnique({
+        const users = await prisma.user.findMany({
             where: {
                 email: email
             }
         });
 
-        if (!user) {
+        if (!users) {
             res.status(404).json(errorResponse(404, 'not found', "Data Not Found", "User Not Found"));
             return;
         };
 
-        res.status(200).json(
-            successResponse(user)
-        );
+        res.status(200).json({
+            ...successResponse(users)
+        });
     } catch (error) {
         const errMessage = error instanceof Error ? error.message : "An unknown error occurred";
         console.error(errMessage)

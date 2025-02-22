@@ -228,3 +228,55 @@ export const verifyTokenUser = async (req: Request, res: Response) => {
         )
     }
 }
+
+export const getUserByUsername = async (req: Request, res: Response) => {
+    try {
+        const { username } = req.params;
+        const user = await prisma.user.findUnique({
+            where: {
+                username: username
+            }
+        });
+
+        if (!user) {
+            res.status(404).json(errorResponse(404, 'not found', "Data Not Found", "User Not Found"));
+            return;
+        };
+
+        res.status(200).json(
+            successResponse(user)
+        );
+    } catch (error) {
+        const errMessage = error instanceof Error ? error.message : "An unknown error occurred";
+        console.error(errMessage)
+        res.status(500).json(
+            errorResponse(500, 'Internal Server Error', error, errMessage)
+        )
+    }
+}
+
+export const getUserByEmail = async (req: Request, res: Response) => {
+    try {
+        const { email } = req.params;
+        const user = await prisma.user.findUnique({
+            where: {
+                email: email
+            }
+        });
+
+        if (!user) {
+            res.status(404).json(errorResponse(404, 'not found', "Data Not Found", "User Not Found"));
+            return;
+        };
+
+        res.status(200).json(
+            successResponse(user)
+        );
+    } catch (error) {
+        const errMessage = error instanceof Error ? error.message : "An unknown error occurred";
+        console.error(errMessage)
+        res.status(500).json(
+            errorResponse(500, 'Internal Server Error', error, errMessage)
+        )
+    }
+}

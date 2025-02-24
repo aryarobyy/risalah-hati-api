@@ -3,8 +3,8 @@ import { getRoomUser, getUserRoom, postUserRoom } from "../controllers/userRoom.
 
 const router = Router();
 
-router.get('/user/:id', getUserRoom)
-router.get('/room/:id', getRoomUser)
+router.get('/user/:id', getUserRoom) // for getting user that joining wich room
+router.get('/room/:id', getRoomUser) // ini buat ngecek user mana aja di suatu room
 router.post('/', postUserRoom)
 
 export default router;

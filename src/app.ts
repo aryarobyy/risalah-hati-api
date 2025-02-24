@@ -4,10 +4,10 @@ import roomRoutes from './routes/room.routes';
 import roomMessageRoutes from './routes/roomMessage.routes';
 import blogRoutes from './routes/blog.routes';
 import vocabRoutes from './routes/vocab.routes';
+import userRoomRoutes from './routes/userRoom.routes';
 import fileUpload from "express-fileupload";
 import cors from "cors";
 import { join } from 'path';
-import userRoomRoutes from './routes/userRoom.routes';
 
 
 const app = express();

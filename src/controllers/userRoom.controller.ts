@@ -32,9 +32,12 @@ export const postUserRoom = async (req: Request, res: Response) => {
 export const getUserRoom = async (req: Request, res: Response) => {
     try {
         const { id } = req.params;
-        const data = await prisma.userRoom.findFirst({
+        const data = await prisma.userRoom.findMany({
             where: {
                 userId: id
+            },
+            include: {
+                room: true
             }
         })
         res.status(200).json(successResponse(data));
@@ -51,6 +54,9 @@ export const getRoomUser = async (req: Request, res: Response) => {
         const data = await prisma.userRoom.findMany({
             where: {
                 roomId: id
+            },
+            include: {
+                user: true
             }
         })
         res.status(200).json(successResponse(data));

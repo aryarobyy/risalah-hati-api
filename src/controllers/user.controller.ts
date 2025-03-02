@@ -215,7 +215,6 @@ export const loginUser = async (req: Request, res: Response) => {
 
 export const verifyTokenUser = async (req: Request, res: Response) => {
     const { token } = req.body;
-
     try {
         const result = verifyToken(token);
         res.status(200).json(

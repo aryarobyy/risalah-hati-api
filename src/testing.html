@@ -83,15 +83,15 @@
             e.preventDefault();
             if (input.value) {
                 socket.emit('sendMessage', { 
-                    senderId: "fadd7bb4-f176-4f89-b9bd-706d91233c8a",
-                    roomId: "ef11e787-d4c1-4557-bed2-753999f8497f",
+                    senderId: "e0d1a554-25bf-4794-9867-3d77777ee5ab",
+                    roomId: "008e5286-9a02-4d23-b873-f00709fcacc4",
                     content: input.value
                 });
                 input.value = '';
             }
         });
 
-        socket.emit("joinRoom", "ef11e787-d4c1-4557-bed2-753999f8497f")
+        socket.emit("joinRoom", "008e5286-9a02-4d23-b873-f00709fcacc4")
 
         socket.on('loadMessages', (data) => {
             console.log(data);

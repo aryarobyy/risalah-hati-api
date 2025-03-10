@@ -19,6 +19,9 @@ export const getRoomMessages = async (req: Request, res: Response) => {
         const messages = await prisma.roomMessage.findMany({
             where: {
                 roomId: id
+            },
+            orderBy: {
+                "createdAt": "desc"
             }
         });
         res.status(200).json(successResponse(messages));

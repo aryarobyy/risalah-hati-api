@@ -9,6 +9,9 @@ export const getRoomMessageByRoomId = async (roomId: string) => {
             },
             include: {
                 sender: true
+            },
+            orderBy: {
+                "createdAt": "asc"
             }
         });
 

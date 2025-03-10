@@ -49,7 +49,6 @@ model Room {
 
   messages RoomMessage[]
   users UserRoom[]
-
 }
 
 // Penghubung buat user sama room
@@ -66,12 +65,12 @@ model UserRoom {
 
 model RoomMessage {
   id String @id @default(uuid())
-  senderId String
+  senderId String? @default("anonymous")
   roomId String
   content String @db.Text
   createdAt DateTime @default(now())
 
-  sender User @relation(fields: [senderId], references: [id])
+  sender User? @relation(fields: [senderId], references: [id], onDelete: SetNull)
   room Room @relation(fields: [roomId], references: [id], onDelete: Cascade)
 
   @@map("room_message")

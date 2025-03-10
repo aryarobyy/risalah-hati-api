@@ -33,9 +33,9 @@ export const updateUserSchema = z.object({
         message: "Username must be at least 4 characters long."
     }).max(255, { message: "Username must not exceed 255 characters." }),
 
-    profilePic: z.string({
-        message: "Profile pic is required"
-    }),
+    // profilePic: z.string({
+    //     message: "Profile pic is required"
+    // }),
 
     // name: z.string({
     //     message: "Name is required."

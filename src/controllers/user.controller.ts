@@ -97,7 +97,7 @@ export const postUser = async (req: Request, res: Response) => {
 export const updateUser = async (req: Request, res: Response) => {
     try {
         const { id } = req.params;
-        const { email, username, name, role, profilePic, bannerPic } = req.body;
+        const { email, username, name, role, profilePic, bannerPic, bio } = req.body;
 
         const existingUser = await prisma.user.findFirst({
             where: {
@@ -125,6 +125,7 @@ export const updateUser = async (req: Request, res: Response) => {
                 username,
                 name,
                 role,
+                bio,
                 profilePic,
                 bannerPic,
             },
@@ -214,7 +215,6 @@ export const loginUser = async (req: Request, res: Response) => {
 
 export const verifyTokenUser = async (req: Request, res: Response) => {
     const { token } = req.body;
-
     try {
         const result = verifyToken(token);
         res.status(200).json(

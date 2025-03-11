@@ -8,11 +8,23 @@ export const getRoomMessageByRoomId = async (roomId: string) => {
                 roomId
             },
             include: {
-                sender: true
+                sender: {
+                    select: {
+                        id: true,
+                        email: true,
+                        username: true,
+                        name: true,
+                        bio: true,
+                        profilePic: true,
+                        bannerPic: true,
+                        role: true,
+                        createdAt: true,
+                    }
+                }
             },
             orderBy: {
                 "createdAt": "asc"
-            }
+            },
         });
 
         return messages;
@@ -33,7 +45,19 @@ export const postMessage = async (data: { senderId: string; roomId: string; cont
         const newMessage = await prisma.roomMessage.create({
             data,
             include: {
-                sender: true
+                sender: {
+                    select: {
+                        id: true,
+                        email: true,
+                        username: true,
+                        name: true,
+                        bio: true,
+                        profilePic: true,
+                        bannerPic: true,
+                        role: true,
+                        createdAt: true,
+                    }
+                }
             }
         });
 

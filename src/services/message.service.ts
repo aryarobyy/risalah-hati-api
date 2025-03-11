@@ -23,7 +23,7 @@ export const getRoomMessageByRoomId = async (roomId: string) => {
                 }
             },
             orderBy: {
-                "createdAt": "asc"
+                "createdAt": "desc"
             },
         });
 
